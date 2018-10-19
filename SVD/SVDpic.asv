@@ -1,0 +1,16 @@
+A=imread('A.png');
+A=double(A);
+AR=A(:,:,1);
+AG=A(:,:,2);
+AB=A(:,:,3);
+[UR,SR,VR]=svd(AR);
+[UG,SG,VG]=svd(AG);
+[UB,SB,VB]=svd(AB);
+K=10;
+BR=UR(:,1:K)*SR(1:K,1:K)*VR(:,1:K)';
+BG=UG(:,1:K)*SG(1:K,1:K)*VG(:,1:K)';
+BB=UB(:,1:K)*SB(1:K,1:K)*VB(:,1:K)';
+B(:,:,1)=BR;
+B(:,:,2)=BG;
+B(:,:,3)=BB;
+B=fix(B);
